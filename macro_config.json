@@ -1,0 +1,472 @@
+{
+  "version": "1.1",
+  "updated": "2026-06-06",
+  "description": "中美宏观风险仪表盘 - 6 大模块 28 指标 (z-score 加权评分)",
+  "data_source_note": "akshare macro_* 月度接口滞后 9 月, 月度指标直接用 config current_value; 债类/实时用实时拉取",
+  "as_of_date": "2026-06-06",
+  "modules": [
+    {
+      "name": "增长 Growth",
+      "key": "growth",
+      "indicators": [
+        {
+          "code": "CN_PMI",
+          "name": "中国制造业 PMI",
+          "country": "CN",
+          "source": "nbs",
+          "freq": "monthly",
+          "lag_days": 1,
+          "weight": 0.9,
+          "lead_lag": "leading",
+          "current_value": 50.7,
+          "as_of": "2026-05",
+          "data_source": "NBS 5月公布: 制造业 PMI 50.7 (略上荣枯线)",
+          "advantage_threshold": "> 51 利好 / < 49 利空",
+          "url": "http://www.stats.gov.cn/"
+        },
+        {
+          "code": "CN_INDUSTRIAL",
+          "name": "中国工业增加值同比",
+          "country": "CN",
+          "source": "nbs",
+          "freq": "monthly",
+          "lag_days": 15,
+          "weight": 0.75,
+          "lead_lag": "leading",
+          "current_value": 6.2,
+          "as_of": "2026-04",
+          "data_source": "NBS 4月公布: 工业增加值同比 +6.2%",
+          "url": "http://www.stats.gov.cn/"
+        },
+        {
+          "code": "CN_RETAIL",
+          "name": "中国社零同比",
+          "country": "CN",
+          "source": "nbs",
+          "freq": "monthly",
+          "lag_days": 15,
+          "weight": 0.7,
+          "lead_lag": "coincident",
+          "current_value": 4.7,
+          "as_of": "2026-04",
+          "data_source": "NBS 4月公布: 社零同比 +4.7% (温和增长)"
+        },
+        {
+          "code": "CN_REALESTATE",
+          "name": "中国房地产销售面积同比",
+          "country": "CN",
+          "source": "nbs",
+          "freq": "monthly",
+          "lag_days": 18,
+          "weight": 0.85,
+          "lead_lag": "leading",
+          "current_value": -6.5,
+          "as_of": "2026-04",
+          "data_source": "NBS 4月公布: 销售面积同比 -6.5% (持续承压)"
+        },
+        {
+          "code": "CN_EXPORT",
+          "name": "中国出口同比 (美元计)",
+          "country": "CN",
+          "source": "chinacustoms",
+          "freq": "monthly",
+          "lag_days": 12,
+          "weight": 0.7,
+          "lead_lag": "leading",
+          "current_value": 7.6
+        },
+        {
+          "code": "US_ISM_PMI",
+          "name": "美国 ISM 制造业 PMI",
+          "country": "US",
+          "source": "ism",
+          "freq": "monthly",
+          "lag_days": 2,
+          "weight": 0.75,
+          "lead_lag": "leading",
+          "current_value": 54.0,
+          "as_of": "2026-05",
+          "data_source": "ISM 5月公布: 制造业 PMI 54.0 (显著高于荣枯线, 制造业强劲)"
+        },
+        {
+          "code": "US_RETAIL",
+          "name": "美国零售销售环比",
+          "country": "US",
+          "source": "census",
+          "freq": "monthly",
+          "lag_days": 15,
+          "weight": 0.7,
+          "lead_lag": "coincident",
+          "current_value": 0.4,
+          "as_of": "2026-04",
+          "data_source": "Census Bureau 4月: 零售环比 +0.4% (稳健)"
+        },
+        {
+          "code": "US_GDP_NOW",
+          "name": "亚特兰大联储 GDPNow",
+          "country": "US",
+          "source": "atlanta_fed",
+          "freq": "weekly",
+          "lag_days": 0,
+          "weight": 0.8,
+          "lead_lag": "leading",
+          "current_value": 2.3
+        }
+      ]
+    },
+    {
+      "name": "通胀 Inflation",
+      "key": "inflation",
+      "indicators": [
+        {
+          "code": "CN_CPI",
+          "name": "中国 CPI 同比",
+          "country": "CN",
+          "source": "nbs",
+          "freq": "monthly",
+          "lag_days": 9,
+          "weight": 0.7,
+          "lead_lag": "lagging",
+          "current_value": 0.3,
+          "as_of": "2026-05",
+          "data_source": "NBS 5月公布: CPI 同比 +0.3% (温和通缩)"
+        },
+        {
+          "code": "CN_PPI",
+          "name": "中国 PPI 同比",
+          "country": "CN",
+          "source": "nbs",
+          "freq": "monthly",
+          "lag_days": 9,
+          "weight": 0.6,
+          "lead_lag": "lagging",
+          "current_value": -1.4,
+          "as_of": "2026-05",
+          "data_source": "NBS 5月公布: PPI 同比 -1.4% (工业品通缩改善中)"
+        },
+        {
+          "code": "US_CPI_CORE",
+          "name": "美国核心 CPI 同比",
+          "country": "US",
+          "source": "bls",
+          "freq": "monthly",
+          "lag_days": 13,
+          "weight": 0.9,
+          "lead_lag": "lagging",
+          "current_value": 2.9,
+          "as_of": "2026-06",
+          "data_source": "user_input",
+          "_old_current_value": 2.8
+        },
+        {
+          "code": "US_PCE_CORE",
+          "name": "美国核心 PCE 同比 (美联储真正锚定)",
+          "country": "US",
+          "source": "bea",
+          "freq": "monthly",
+          "lag_days": 28,
+          "weight": 0.95,
+          "lead_lag": "lagging",
+          "current_value": 2.7,
+          "as_of": "2026-04",
+          "data_source": "BEA 4月公布: 核心 PCE 同比 2.7% (美联储锚定 2% 仍偏高)"
+        },
+        {
+          "code": "US_INFLATION_EXP",
+          "name": "密歇根 5-10 年通胀预期",
+          "country": "US",
+          "source": "umich",
+          "freq": "monthly",
+          "lag_days": 8,
+          "weight": 0.85,
+          "lead_lag": "leading",
+          "current_value": 3.9,
+          "as_of": "2026-05",
+          "data_source": "密歇根大学 5月终值: 3.9% (长期通胀预期持续上行)"
+        }
+      ]
+    },
+    {
+      "name": "流动性 Liquidity",
+      "key": "liquidity",
+      "indicators": [
+        {
+          "code": "CN_M1M2",
+          "name": "中国 M1-M2 剪刀差",
+          "country": "CN",
+          "source": "pboc",
+          "freq": "monthly",
+          "lag_days": 10,
+          "weight": 0.85,
+          "lead_lag": "leading",
+          "current_value": -3.4
+        },
+        {
+          "code": "CN_SOCIAL_FIN",
+          "name": "中国社融存量同比",
+          "country": "CN",
+          "source": "pboc",
+          "freq": "monthly",
+          "lag_days": 9,
+          "weight": 0.8,
+          "lead_lag": "leading",
+          "current_value": 7.9
+        },
+        {
+          "code": "CN_DR007",
+          "name": "中国 DR007 (实际政策利率)",
+          "country": "CN",
+          "source": "chinamoney",
+          "freq": "daily",
+          "lag_days": 1,
+          "weight": 0.75,
+          "lead_lag": "leading",
+          "current_value": 1.85
+        },
+        {
+          "code": "US_TGA",
+          "name": "美国 TGA 余额 (万亿美元)",
+          "country": "US",
+          "source": "treasury",
+          "freq": "weekly",
+          "lag_days": 4,
+          "weight": 0.6,
+          "lead_lag": "leading",
+          "current_value": 1.2
+        },
+        {
+          "code": "US_DXY",
+          "name": "美元指数 DXY",
+          "country": "US",
+          "source": "wsj",
+          "freq": "daily",
+          "lag_days": 0,
+          "weight": 0.75,
+          "lead_lag": "leading",
+          "current_value": 104.5
+        }
+      ]
+    },
+    {
+      "name": "利率 Rates",
+      "key": "rates",
+      "indicators": [
+        {
+          "code": "CN_10Y",
+          "name": "中国 10 年国债收益率",
+          "country": "CN",
+          "source": "chinabond",
+          "freq": "daily",
+          "lag_days": 0,
+          "weight": 0.85,
+          "lead_lag": "leading",
+          "current_value": 1.82
+        },
+        {
+          "code": "US_10Y",
+          "name": "美国 10 年国债收益率",
+          "country": "US",
+          "source": "treasury",
+          "freq": "daily",
+          "lag_days": 0,
+          "weight": 0.85,
+          "lead_lag": "leading",
+          "current_value": 4.2
+        },
+        {
+          "code": "US_2Y",
+          "name": "美国 2 年国债收益率",
+          "country": "US",
+          "source": "treasury",
+          "freq": "daily",
+          "lag_days": 0,
+          "weight": 0.6,
+          "lead_lag": "leading",
+          "current_value": 4.6
+        },
+        {
+          "code": "US_10Y_2Y_SPREAD",
+          "name": "美 10Y-2Y 利差 (衰退信号)",
+          "country": "US",
+          "source": "computed",
+          "freq": "daily",
+          "lag_days": 0,
+          "weight": 0.95,
+          "lead_lag": "leading",
+          "current_value": -0.4,
+          "alert_note": "倒挂持续 6+ 月 = 衰退信号"
+        },
+        {
+          "code": "US_TIPS_10Y",
+          "name": "美国 TIPS 实际利率 (10Y)",
+          "country": "US",
+          "source": "treasury",
+          "freq": "daily",
+          "lag_days": 0,
+          "weight": 0.8,
+          "lead_lag": "leading",
+          "current_value": 2.0
+        }
+      ]
+    },
+    {
+      "name": "风险偏好 Sentiment",
+      "key": "sentiment",
+      "indicators": [
+        {
+          "code": "US_VIX",
+          "name": "VIX 恐慌指数",
+          "country": "US",
+          "source": "cboe",
+          "freq": "daily",
+          "lag_days": 0,
+          "weight": 0.85,
+          "lead_lag": "leading",
+          "current_value": 15.2,
+          "alert_note": "> 30 警惕 / > 40 危机"
+        },
+        {
+          "code": "CN_USD_CNY",
+          "name": "人民币兑美元",
+          "country": "CN",
+          "source": "chinamoney",
+          "freq": "daily",
+          "lag_days": 0,
+          "weight": 0.75,
+          "lead_lag": "leading",
+          "current_value": 7.25
+        },
+        {
+          "code": "CN_NORTHBOUND",
+          "name": "北向资金日净流入 (亿元)",
+          "country": "CN",
+          "source": "stock",
+          "freq": "daily",
+          "lag_days": 0,
+          "weight": 0.7,
+          "lead_lag": "coincident",
+          "current_value": 0
+        }
+      ]
+    },
+    {
+      "name": "就业 Employment",
+      "key": "employment",
+      "indicators": [
+        {
+          "code": "CN_UNEMPLOY",
+          "name": "中国城镇调查失业率",
+          "country": "CN",
+          "source": "nbs",
+          "freq": "monthly",
+          "lag_days": 15,
+          "weight": 0.6,
+          "lead_lag": "lagging",
+          "current_value": 5.0,
+          "as_of": "2026-05",
+          "data_source": "NBS 5月公布: 城镇调查失业率 5.0% (略降)"
+        },
+        {
+          "code": "US_NONFARM",
+          "name": "美国非农就业 (万人)",
+          "country": "US",
+          "source": "bls",
+          "freq": "monthly",
+          "lag_days": 4,
+          "weight": 0.85,
+          "lead_lag": "coincident",
+          "current_value": 17.2,
+          "as_of": "2026-05",
+          "data_source": "user_input",
+          "_old_current_value": 17.2
+        },
+        {
+          "code": "US_INITIAL_CLAIMS",
+          "name": "美国初请失业金人数 (万)",
+          "country": "US",
+          "source": "dol",
+          "freq": "weekly",
+          "lag_days": 2,
+          "weight": 0.8,
+          "lead_lag": "leading",
+          "current_value": 22.5,
+          "as_of": "2026-05-30",
+          "data_source": "DOL 周度, 截至 2026-05-30",
+          "alert_note": "> 30 警惕衰退"
+        },
+        {
+          "code": "US_JOLTS",
+          "name": "美国 JOLTS 职位空缺 (万)",
+          "country": "US",
+          "source": "bls",
+          "freq": "monthly",
+          "lag_days": 5,
+          "weight": 0.7,
+          "lead_lag": "leading",
+          "current_value": 850.0,
+          "as_of": "2026-04",
+          "data_source": "BLS 4月 (骨架, 待接入)"
+        }
+      ]
+    }
+  ],
+  "weights_by_category": {
+    "growth": 0.25,
+    "inflation": 0.2,
+    "liquidity": 0.2,
+    "rates": 0.2,
+    "sentiment": 0.1,
+    "employment": 0.05
+  },
+  "alert_rules": [
+    {
+      "name": "强买",
+      "level": "L1",
+      "direction": "up",
+      "color": "#26a69a",
+      "condition": "composite > 1.5 AND CN_PMI > 51 AND US_ISM_PMI > 51",
+      "description": "中美双向景气，强烈买入"
+    },
+    {
+      "name": "温和买",
+      "level": "L2",
+      "direction": "up",
+      "color": "#80cbc4",
+      "condition": "composite > 0.5",
+      "description": "宏观偏多"
+    },
+    {
+      "name": "中性",
+      "level": "normal",
+      "direction": "flat",
+      "color": "#888888",
+      "condition": "abs(composite) <= 0.5",
+      "description": "观望"
+    },
+    {
+      "name": "温和卖",
+      "level": "L3",
+      "direction": "down",
+      "color": "#ffb74d",
+      "condition": "composite < -0.5",
+      "description": "宏观偏空，减仓"
+    },
+    {
+      "name": "强卖",
+      "level": "L2",
+      "direction": "down",
+      "color": "#ff6e40",
+      "condition": "composite < -1.5 AND CN_PMI < 49 AND US_ISM_PMI < 49",
+      "description": "中美双向收缩，强烈卖出"
+    },
+    {
+      "name": "危机",
+      "level": "L1",
+      "direction": "down",
+      "color": "#ff1744",
+      "condition": "US_10Y_2Y_SPREAD < 0 AND US_VIX > 30",
+      "description": "衰退 + 恐慌，全面避险"
+    }
+  ],
+  "cooldown_minutes": 30
+}
